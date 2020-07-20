@@ -1,0 +1,52 @@
+--3
+SELECT count (*) FROM countries
+WHERE continent = 'Africa';
+
+--4
+/*I had to check the answer for this, as I hadn't taken well presented 
+notes for joining tables */
+
+SELECT SUM(population)
+FROM population_years
+JOIN countries 
+ON population_years.country_id = countries.id
+WHERE continent = 'Ocenia'
+AND year = 2005;
+
+--5
+SELECT ROUND(AVG(population) ,2)
+FROM population_years
+JOIN countries
+ON population_years.country_id = countries.id
+WHERE continent = 'South America'
+AND year = 2003;
+
+--6
+SELECT DISTINCT name, population, year
+FROM countries
+JOIN population_years
+ON countries.id = population_years.country_id
+WHERE year = 2007
+AND population IS NOT NULL
+ORDER BY population ASC
+LIMIT 1;
+
+--7
+SELECT DISTINCT name, ROUND(AVG(population), 2)
+FROM countries
+JOIN population_years
+ON countries.id = population_years.country_id
+WHERE name = 'Poland';
+
+--8
+SELECT COUNT(name)
+FROM countries
+WHERE name LIKE '%The%';
+
+--9
+SELECT DISTINCT continent, ROUND(SUM(population) ,2)
+FROM countries
+JOIN population_years
+ON countries.id = population_years.country_id
+WHERE year = 2010
+GROUP BY continent;
